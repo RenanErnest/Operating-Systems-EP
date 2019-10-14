@@ -5,13 +5,23 @@ File priorityFile, quantumFile;
 File [] processFiles;
 
 ArrayList<BCP> runningProcessTable = new ArrayList<BCP>(); // Store all BCP references
-  
 PriorityQueue<Object> ready = new PriorityQueue<Object>(); // Create an empty priority queue for ready process
 Queue<Object> blocked = new LinkedList<Object>(); // Simple FIFO for blocked process
 
 public static void main(String [] args)
 {
-  Init();
+  bool end = false; 
+  Init();  
+  while(!end)
+  {
+    Run();
+    // Are all the process ended ?
+  }
+}
+
+void Run()
+{
+  // Run a process quantum times then return
 }
 
 Object AlternateProcess()
@@ -28,8 +38,7 @@ void Init()
   for(int i = 1; i < 11; i++) // Read each process
   {
     String index = (i < 10 ? "0" : "") + i;
-    processFiles[i] = new File(index + ".txt");
-    
+    processFiles[i] = new File(index + ".txt");  
     BCP newProcess = new BCP(index, br.readLine()); // Create BCP with name and priority of the process 
   }
 }
