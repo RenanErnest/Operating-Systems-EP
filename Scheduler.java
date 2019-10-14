@@ -22,14 +22,14 @@ Object AlternateProcess()
 void Init()
 {
   priorityFile = new File("prioridades.txt"); 
-  quantumFile = new File("quantum.txt"); 
-  
+  quantumFile = new File("quantum.txt");  
+  BufferedReader br = new BufferedReader(new FileReader(priorityFile)); 
   
   for(int i = 1; i < 11; i++) // Read each process
   {
     String index = (i < 10 ? "0" : "") + i;
     processFiles[i] = new File(index + ".txt");
     
-    BCP newProcess = new BCP(index, GetPriority(i)); // Create process BCP
+    BCP newProcess = new BCP(index, br.readLine()); // Create BCP with name and priority of the process 
   }
 }
