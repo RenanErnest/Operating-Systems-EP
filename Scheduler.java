@@ -4,7 +4,7 @@ import java.util;
 File priorityFile, quantumFile;
 File [] processFiles = new File[10];
 
-ArrayList<BCP> runningProcessTable = new ArrayList<BCP>(); // Store all BCP references
+LinkedList<BCP> runningProcessTable = new LinkedList<BCP>(); // Store all BCP references
 LinkedList<LinkedList<BCP>> readyList; // List of ready queues
 Queue<Object> blocked = new LinkedList<Object>(); // Simple FIFO for blocked process
 int X, Y, quantum, programName = "";
@@ -27,7 +27,28 @@ void Run()
   // Run a process quantum times then return
   String instruction;
   int aux = 0;
-  // Get instruction  
+  int queue = maxPriorityQueue;
+  
+  for(int i = 0; i < maxPriorityQueue; i++)
+    {
+      try {
+          BCP bcp =  readyList.get(queue).removeFirst(); // Pick the first process of the max priority queue
+          if(bcp != null) break;
+          } catch (NoSuchElementException e) {
+          if(queue > 0) // No process in this queue. Note that we cannot decrease max priority because some high priority program can be blocked
+          {
+            queue--;
+            continue;
+          } 
+          else if(runningProcessTable.size() == 0) // There's no process running
+          {
+            end = true;
+            return;
+          }
+          else return; // The loop in the main function will call Run again    
+      }
+  }
+  
   if((aux = instruction.indexOf('=')) != -1)
   {
     if(instruction.charAt(0) == 'X') X = Character.getNumericValue(instruction.charAt(2));
@@ -37,11 +58,6 @@ void Run()
   {
     saida += "E/S iniciada em " + programName + "\n";
   }
-}
-
-BCP AlternateProcess()
-{
-  return ready.poll(); // Return the top priority process
 }
 
 void Init()
@@ -54,7 +70,7 @@ void Init()
      if(processPriority > maxPriorityQueue) maxPriorityQueue = processPriority;
   }
   brGetMax.close();
-  for(int i = 0; i <= maxPriorityQueue; i++) // Add a new list from max priority (0 counting)
+  for(int i = 0; i <= maxPriorityQueue; i++) // Add a set of lists from 0 to max priority
   {
     readyList.add(new LinkedList<BCP>());
   }
