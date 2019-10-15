@@ -5,8 +5,8 @@ int X, Y;
 int textSegmentIndex;
 String programName;
 
-public BCP(String name, String priorityS)
+public BCP(String name, int priority)
 {
-  priority = (int)(new Integer.parseint(priorityS));
+  this.priority = priority;
   programName = name;
 }
