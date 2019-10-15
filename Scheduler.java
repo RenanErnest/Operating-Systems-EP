@@ -12,7 +12,8 @@ public class Scheduler{
   String output = "";
   String[] memory = new String[220]; // 22 lines per program
   int maxPriorityQueue = 0;
-
+  int swapTotalTime, totalInstructionPerQuantum, swapCounter = 0;
+  
   public static void main(String [] args)
   {
     bool end = false; 
@@ -81,9 +82,12 @@ public class Scheduler{
       }
       else if(instruction.equals("SAIDA"))
       {
+        instExNumb++;
         saida += programName + " terminado. X=" + X + ". Y=" + Y +".\n";
       }
     }
+      totalInstructionPerQuantum += instExNumb;
+      swapCounter++;
   }
 
   void Init()
