@@ -51,13 +51,16 @@ void Init()
   BufferedReader br = new BufferedReader(new FileReader(priorityFile)); 
   BufferedReader qbr = new BufferedReader(new FileReader(quantumFile)); 
   quantum = Integer.parseInt(qbr.readLine());
+  int maxPriority = 0;
   
   for(int i = 1; i < 11; i++) // Read each command block
   {
     String index = (i < 10 ? "0" : "") + i;
     processFiles[i-1] = new File(index + ".txt");  
     BufferedReader pbr = new BufferedReader(new FileReader(processFiles[i-1])); 
-    BCP newProcess = new BCP(pbr.readLine(), br.readLine()); // Create BCP with name and priority of the process 
+    int processPriority = Integer.parseInt(br.readLine());
+    if(processPriority > maxPriority) maxPriority = processPriority;
+    BCP newProcess = new BCP(pbr.readLine(), processPriority); // Create BCP with name and priority of the process 
     runningProcessTable.add(newProcess); // The process is running
     ready.add(newProcess); // The new process is ready to execute
   }
