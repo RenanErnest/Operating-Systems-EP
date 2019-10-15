@@ -30,23 +30,23 @@ void Run()
   int queue = maxPriorityQueue;
   
   for(int i = 0; i < maxPriorityQueue; i++)
-    {
+  {
       try {
-          BCP bcp =  readyList.get(queue).removeFirst(); // Pick the first process of the max priority queue
-          if(bcp != null) break;
-          } catch (NoSuchElementException e) {
-          if(queue > 0) // No process in this queue. Note that we cannot decrease max priority because some high priority program can be blocked
-          {
-            queue--;
-            continue;
-          } 
-          else if(runningProcessTable.size() == 0) // There's no process running
-          {
-            end = true;
-            return;
-          }
-          else return; // The loop in the main function will call Run again    
-      }
+        BCP bcp =  readyList.get(queue).removeFirst(); // Pick the first process of the max priority queue
+        if(bcp != null) break;
+        } catch (NoSuchElementException e) {
+        if(queue > 0) // No process in this queue. Note that we cannot decrease max priority because some high priority program can be blocked
+        {
+          queue--;
+          continue;
+        } 
+        else if(runningProcessTable.size() == 0) // There's no process running
+        {
+          end = true;
+          return;
+        }
+        else return; // The loop in the main function will call Run again    
+        }
   }
   
   if((aux = instruction.indexOf('=')) != -1)
