@@ -94,8 +94,13 @@ public class Scheduler{
       processFiles[i-1] = new File(index + ".txt");  
       BufferedReader pbr = new BufferedReader(new FileReader(processFiles[i-1])); 
       int processPriority = Integer.parseInt(br.readLine());
-      BCP newProcess = new BCP(pbr.readLine(), processPriority); // Create BCP with name and priority of the process 
-      readyList.get(processPriority).add(newProcess); // The new process is ready to execute
+      BCP newProcess = new BCP(pbr.readLine(), processPriority, i-1); // Create BCP with name, priority of the process and textSegmentIndex
+      readyList.get(processPriority).add(newProcess); // The new process is ready to execute 
+      for(int j = 0; j < 22; j++)
+      {
+        memory[(i-1) + j] = pbr.readLine(); // Fill the memory with program code or null if the end was reached
+      }      
+      pbr.close();
     }
 
     for(int i = maxPriorityQueue; i >= 0; i--) 
