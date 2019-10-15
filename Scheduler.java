@@ -73,28 +73,32 @@ public class Scheduler{
   {
     priorityFile = new File("prioridades.txt"); 
     BufferedReader brGetMax = new BufferedReader(new FileReader(priorityFile)); 
+    
     for(int i = 0; i < 10; i++) // Get the maximum priority
     {
        int processPriority = Integer.parseInt(brGetMax.readLine());
        if(processPriority > maxPriorityQueue) maxPriorityQueue = processPriority;
     }
     brGetMax.close();
+    
     for(int i = 0; i <= maxPriorityQueue; i++) readyList.add(new LinkedList<BCP>()); // Add a set of lists from 0 to maxPriorityQueue
     quantumFile = new File("quantum.txt");  
     BufferedReader br = new BufferedReader(new FileReader(priorityFile)); 
     BufferedReader qbr = new BufferedReader(new FileReader(quantumFile)); 
     quantum = Integer.parseInt(qbr.readLine());
-
+    
     for(int i = 1; i < 11; i++) // Read each command block
     {
       String index = (i < 10 ? "0" : "") + i;
       processFiles[i-1] = new File(index + ".txt");  
       BufferedReader pbr = new BufferedReader(new FileReader(processFiles[i-1])); 
       int processPriority = Integer.parseInt(br.readLine());
-      BCP newProcess = new BCP(pbr.readLine(), processPriority); // Create BCP with name and priority of the process 
-      readyList.get(processPriority).add(newProcess); // The new process is ready to execute
+      BCP newProcess = new BCP(pbr.readLine(), processPriority, i-1); // Create BCP with name, priority of the process and textSegmentIndex
+      readyList.get(processPriority).add(newProcess); // The new process is ready to execute 
+      for(int j = 0; j < 22; j++) memory[(i-1) + j] = pbr.readLine(); // Fill the memory with program code or null if the end was reached
+      pbr.close();
     }
-
+    
     for(int i = maxPriorityQueue; i >= 0; i--) 
     {
       LinkedList<BCP> list = readyList.get(i);

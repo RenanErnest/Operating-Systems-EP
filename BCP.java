@@ -6,9 +6,10 @@ public class BCP{
   public int textSegmentIndex;
   public String programName;
 
-  public BCP(String name, int priority)
+  public BCP(String name, int priority, int textSegmentIndex)
   {
     this.priority = priority;
     programName = name;
+    this.textSegmentIndex = textSegmentIndex;
   }
 }
