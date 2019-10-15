@@ -8,7 +8,7 @@ public class Escalonador{
   LinkedList<BCP> runningProcessTable = new LinkedList<BCP>(); // Store all BCP references
   LinkedList<LinkedList<BCP>> readyList; // List of ready queues
   Queue<Object> blocked = new LinkedList<Object>(); // Simple FIFO for blocked process
-  int X, Y, quantum, programName, programQuantum, PC, textSegmentIndex;
+  int X, Y, quantum, programName, programQuantum, PC, textSegmentIndex, credits;
   String output = "";
   String[] memory = new String[220]; // 22 lines per program
   int maxPriorityQueue = 0;
@@ -58,6 +58,7 @@ public class Escalonador{
     this.Y = bcp.Y;
     this.programName = bcp.programName;
     this.textSegmentIndex = bcp.textSegmentIndex;
+    this.credits = bcp.credits;
     
     instruction = memory[textSegmentIndex + PC];
     PC++;
@@ -75,6 +76,7 @@ public class Escalonador{
       {
         instExNumb++;
         saida += "E/S iniciada em " + programName + "\n";
+        
       }
       else if(instruction.equals("COM"))
       {
@@ -84,10 +86,22 @@ public class Escalonador{
       {
         instExNumb++;
         saida += programName + " terminado. X=" + X + ". Y=" + Y +".\n";
+        totalInstructionPerQuantum += instExNumb;
+        swapCounter++;
+        return;
       }
     }
       totalInstructionPerQuantum += instExNumb;
       swapCounter++;
+      credits -= 2;
+      programQuantum++;
+    
+      bcp.PC = this.PC;                           // Update the process BCP and add it to the ready queue
+      bcp.programQuantum = this.programQuantum;
+      bcp.X = this.X;
+      bcp.Y = this.Y;
+      bcp.credits = this.credits;
+      readyList.get(credits).add(bcp);
   }
 
   void Init()
