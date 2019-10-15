@@ -80,7 +80,8 @@ public class Scheduler{
        if(processPriority > maxPriorityQueue) maxPriorityQueue = processPriority;
     }
     brGetMax.close();
-    for(int i = 0; i <= maxPriorityQueue; i++) readyList.add(new LinkedList<BCP>()); // Add a set of lists from 0 to max priority
+    
+    for(int i = 0; i <= maxPriorityQueue; i++) readyList.add(new LinkedList<BCP>()); // Add a set of lists from 0 to maxPriorityQueue
     quantumFile = new File("quantum.txt");  
     BufferedReader br = new BufferedReader(new FileReader(priorityFile)); 
     BufferedReader qbr = new BufferedReader(new FileReader(quantumFile)); 
