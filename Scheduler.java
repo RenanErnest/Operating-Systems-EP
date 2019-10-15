@@ -57,15 +57,32 @@ public class Scheduler{
     this.Y = bcp.Y;
     this.programName = bcp.programName;
     this.textSegmentIndex = bcp.textSegmentIndex;
-
-    if((aux = instruction.indexOf('=')) != -1)
+    
+    instruction = memory[textSegmentIndex + PC];
+    PC++;
+    
+    int instExNumb = 0; // Number of executed instructions
+    for(int j = 0; j < programQuantum; j++)
     {
-      if(instruction.charAt(0) == 'X') X = Character.getNumericValue(instruction.charAt(2));
-      else Y = Character.getNumericValue(instruction.charAt(2));
-    }
-    else if(instruction.equals("E/S"))
-    {
-      saida += "E/S iniciada em " + programName + "\n";
+      if((aux = instruction.indexOf('=')) != -1)
+      {
+        instExNumb++;
+        if(instruction.charAt(0) == 'X') X = Character.getNumericValue(instruction.charAt(2));
+        else Y = Character.getNumericValue(instruction.charAt(2));
+      }
+      else if(instruction.equals("E/S"))
+      {
+        instExNumb++;
+        saida += "E/S iniciada em " + programName + "\n";
+      }
+      else if(instruction.equals("COM"))
+      {
+        instExNumb++;
+      }
+      else if(instruction.equals("SAIDA"))
+      {
+        saida += programName + " terminado. X=" + X + ". Y=" + Y +".\n";
+      }
     }
   }
 
@@ -93,7 +110,7 @@ public class Scheduler{
       processFiles[i-1] = new File(index + ".txt");  
       BufferedReader pbr = new BufferedReader(new FileReader(processFiles[i-1])); 
       int processPriority = Integer.parseInt(br.readLine());
-      BCP newProcess = new BCP(pbr.readLine(), processPriority, i-1); // Create BCP with name, priority of the process and textSegmentIndex
+      BCP newProcess = new BCP(pbr.readLine(), processPriority, (i-1) * 22); // Create BCP with name, priority of the process and textSegmentIndex
       readyList.get(processPriority).add(newProcess); // The new process is ready to execute 
       for(int j = 0; j < 22; j++) memory[(i-1) + j] = pbr.readLine(); // Fill the memory with program code or null if the end was reached
       pbr.close();
