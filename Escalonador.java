@@ -1,7 +1,7 @@
 import java.util.Collections;
 import java.util;
 
-public class Scheduler{
+public class Escalonador{
   File priorityFile, quantumFile;
   File [] processFiles = new File[10];
 
