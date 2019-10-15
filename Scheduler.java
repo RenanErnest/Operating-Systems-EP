@@ -73,6 +73,7 @@ public class Scheduler{
   {
     priorityFile = new File("prioridades.txt"); 
     BufferedReader brGetMax = new BufferedReader(new FileReader(priorityFile)); 
+    
     for(int i = 0; i < 10; i++) // Get the maximum priority
     {
        int processPriority = Integer.parseInt(brGetMax.readLine());
@@ -84,6 +85,7 @@ public class Scheduler{
     BufferedReader br = new BufferedReader(new FileReader(priorityFile)); 
     BufferedReader qbr = new BufferedReader(new FileReader(quantumFile)); 
     quantum = Integer.parseInt(qbr.readLine());
+    
     for(int i = 1; i < 11; i++) // Read each command block
     {
       String index = (i < 10 ? "0" : "") + i;
@@ -95,6 +97,7 @@ public class Scheduler{
       for(int j = 0; j < 22; j++) memory[(i-1) + j] = pbr.readLine(); // Fill the memory with program code or null if the end was reached
       pbr.close();
     }
+    
     for(int i = maxPriorityQueue; i >= 0; i--) 
     {
       LinkedList<BCP> list = readyList.get(i);
