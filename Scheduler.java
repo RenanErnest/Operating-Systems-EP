@@ -7,8 +7,9 @@ File [] processFiles = new File[10];
 LinkedList<BCP> runningProcessTable = new LinkedList<BCP>(); // Store all BCP references
 LinkedList<LinkedList<BCP>> readyList; // List of ready queues
 Queue<Object> blocked = new LinkedList<Object>(); // Simple FIFO for blocked process
-int X, Y, quantum, programName = "";
+int X, Y, quantum, programName, programQuantum, PC, textSegmentIndex;
 String output = "";
+String[] memory = new String[220]; // 22 lines per program
 int maxPriorityQueue = 0;
 
 public static void main(String [] args)
@@ -30,24 +31,31 @@ void Run()
   int queue = maxPriorityQueue;
   
   for(int i = 0; i < maxPriorityQueue; i++)
-    {
+  {
       try {
-          BCP bcp =  readyList.get(queue).removeFirst(); // Pick the first process of the max priority queue
-          if(bcp != null) break;
-          } catch (NoSuchElementException e) {
-          if(queue > 0) // No process in this queue. Note that we cannot decrease max priority because some high priority program can be blocked
-          {
-            queue--;
-            continue;
-          } 
-          else if(runningProcessTable.size() == 0) // There's no process running
-          {
-            end = true;
-            return;
-          }
-          else return; // The loop in the main function will call Run again    
-      }
+        BCP bcp =  readyList.get(queue).removeFirst(); // Pick the first process of the max priority queue
+        if(bcp != null) break;
+        } catch (NoSuchElementException e) {
+        if(queue > 0) // No process in this queue. Note that we cannot decrease max priority because some high priority program can be blocked
+        {
+          queue--;
+          continue;
+        } 
+        else if(runningProcessTable.size() == 0) // There's no process running
+        {
+          end = true;
+          return;
+        }
+        else return; // The loop in the main function will call Run again    
+        }
   }
+  if(bcp == null) return; // Check
+  this.PC = bcp.PC;                                 // Get the program context
+  this.programQuantum = bcp.programQuantum;
+  this.X = bcp.X;
+  this.Y = bcp.Y;
+  this.programName = bcp.programName;
+  this.textSegmentIndex = bcp.textSegmentIndex;
   
   if((aux = instruction.indexOf('=')) != -1)
   {
