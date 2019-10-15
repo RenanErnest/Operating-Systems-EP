@@ -60,12 +60,12 @@ public class Escalonador{
     this.textSegmentIndex = bcp.textSegmentIndex;
     this.credits = bcp.credits;
     
-    instruction = memory[textSegmentIndex + PC];
-    PC++;
-    
     int instExNumb = 0; // Number of executed instructions
     for(int j = 0; j < programQuantum; j++)
     {
+       instruction = memory[textSegmentIndex + PC];
+       PC++;
+      
       if((aux = instruction.indexOf('=')) != -1)
       {
         instExNumb++;
