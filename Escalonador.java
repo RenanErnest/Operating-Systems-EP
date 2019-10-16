@@ -48,6 +48,24 @@ public class Escalonador{
             end = true;
             return;
           }
+          else if(queue == 0) // Are all the running process in the 0 queue ?
+          {
+            bool allZero = true;
+            for(BCP o : runningProcessTable)
+            {
+              if(o.credits > 0) allZero = false;
+            }
+            if(allZero)
+            {
+              readyList.get(0).clear();
+              for(BCP o : runningProcessTable)
+              {
+                o.credits = o.priority;
+                readyList.get(o.credits).add(o);
+              }
+              return;
+            }
+          }
           else return; // The loop in the main function will call Run again    
           }
     }
@@ -96,6 +114,7 @@ public class Escalonador{
         blocked.add(bcp);
         bcp.processStatus = 2; // Blocked
         bcp.blockedCounter = 2;
+        break;
       }
       else if(instruction.equals("COM"))
       {
@@ -123,7 +142,7 @@ public class Escalonador{
       bcp.X = this.X;
       bcp.Y = this.Y;
       bcp.credits = this.credits;
-      readyList.get(credits).add(bcp);
+      readyList.get(credits).addFirst(bcp); // The process had most priority before
   }
 
   void Init()
