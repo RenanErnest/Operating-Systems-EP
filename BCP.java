@@ -2,7 +2,7 @@ public class BCP{
   public int PC;
   public int processStatus;
   public int priority;
-  public int X, Y;
+  public int X = 0, Y = 0;
   public int blockedCounter;
   public int textSegmentIndex;
   public String programName;
