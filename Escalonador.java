@@ -195,7 +195,7 @@ public class Escalonador{
       int processPriority = Integer.parseInt(br.readLine());
       BCP newProcess = new BCP(pbr.readLine(), processPriority, (i-1) * 22); // Create BCP with name, priority of the process and textSegmentIndex
       readyList.get(processPriority).add(newProcess); // The new process is ready to execute 
-      for(int j = 0; j < 22; j++) memory[(i-1) + j] = pbr.readLine(); // Fill the memory with program code or null if the end was reached
+      for(int j = 0; j < 22; j++) memory[(i-1) * 22 + j] = pbr.readLine(); // Fill the memory with program code or null if the end was reached
       pbr.close();
     }
     
