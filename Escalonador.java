@@ -45,7 +45,7 @@ public class Escalonador{
     int queue = maxPriorityQueue;
     BCP bcp = null;
 
-    for(int i = 0; i < maxPriorityQueue; i++)
+    for(int i = 0; i < maxPriorityQueue + 1; i++)
     {
         try {
           bcp =  readyList.get(queue).removeFirst(); // Pick the first process of the max priority queue
