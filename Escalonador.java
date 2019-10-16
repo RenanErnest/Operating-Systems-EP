@@ -7,7 +7,7 @@ public class Escalonador{
 
   LinkedList<BCP> runningProcessTable = new LinkedList<BCP>(); // Store all BCP references
   LinkedList<LinkedList<BCP>> readyList; // List of ready queues
-  Queue<BCP> blocked = new LinkedList<BCP>(); // Simple FIFO for blocked process
+  LinkedList<BCP> blocked = new LinkedList<BCP>(); // Simple FIFO for blocked process
   int X, Y, quantum, programName, programQuantum, PC, textSegmentIndex, credits;
   String output = "";
   String[] memory = new String[220]; // 22 lines per program
@@ -76,8 +76,8 @@ public class Escalonador{
          }
          else 
          {
-           blocked.remove(); // Remove the first BCP of the list
            readyList.get(o.credits).add(o); // Add the BCP to the ready queue
+           blocked.remove(o); 
          }
        }
       
@@ -105,6 +105,7 @@ public class Escalonador{
         saida += programName + " terminado. X=" + X + ". Y=" + Y +".\n";
         totalInstructionPerQuantum += instExNumb;
         swapCounter++;
+        runningProcessTable.remove(bcp); // This program isn't running anymore
         return;
       }
     }
