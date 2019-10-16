@@ -60,6 +60,7 @@ public class Escalonador{
     this.textSegmentIndex = bcp.textSegmentIndex;
     this.credits = bcp.credits;
     
+    bcp.processStatus = 1; // Running 
     int instExNumb = 0; // Number of executed instructions
     int tempQuantum = programQuantum;
     if(queue == 0) tempQuantum = queue; // 0 queue uses round robin with 1 quantum
@@ -77,6 +78,7 @@ public class Escalonador{
          else 
          {
            readyList.get(o.credits).add(o); // Add the BCP to the ready queue
+           o.processStatus = 0; // Ready
            blocked.remove(o); 
          }
        }
@@ -92,7 +94,7 @@ public class Escalonador{
         instExNumb++;
         saida += "E/S iniciada em " + programName + "\n";
         blocked.add(bcp);
-        bcp.processStatus = 1;
+        bcp.processStatus = 2; // Blocked
         bcp.blockedCounter = 2;
       }
       else if(instruction.equals("COM"))
@@ -109,6 +111,8 @@ public class Escalonador{
         return;
       }
     }
+      if(bcp.processStatus != 2) bcp.processStatus = 0; // Ready except by E/S
+    
       totalInstructionPerQuantum += instExNumb;
       swapCounter++;
       credits -= 2;
