@@ -7,7 +7,7 @@ public class Escalonador{
 
   LinkedList<BCP> runningProcessTable = new LinkedList<BCP>(); // Store all BCP references
   LinkedList<LinkedList<BCP>> readyList; // List of ready queues
-  Queue<Object> blocked = new LinkedList<Object>(); // Simple FIFO for blocked process
+  Queue<BCP> blocked = new LinkedList<BCP>(); // Simple FIFO for blocked process
   int X, Y, quantum, programName, programQuantum, PC, textSegmentIndex, credits;
   String output = "";
   String[] memory = new String[220]; // 22 lines per program
@@ -61,10 +61,25 @@ public class Escalonador{
     this.credits = bcp.credits;
     
     int instExNumb = 0; // Number of executed instructions
-    for(int j = 0; j < programQuantum; j++)
+    int tempQuantum = programQuantum;
+    if(queue == 0) tempQuantum = queue; // 0 queue uses round robin with 1 quantum
+    for(int j = 0; j < tempQuantum; j++) // This same program will run quantum times
     {
        instruction = memory[textSegmentIndex + PC];
        PC++;
+      
+       for(BCP o : blocked) // Decrease the time to complete E/S for all blocked process
+       {
+         if(o.blockedCounter == 2)
+         {
+           o.blockedCounter--;
+         }
+         else 
+         {
+           blocked.remove(); // Remove the first BCP of the list
+           readyList.get(o.credits).add(o); // Add the BCP to the ready queue
+         }
+       }
       
       if((aux = instruction.indexOf('=')) != -1)
       {
@@ -76,7 +91,9 @@ public class Escalonador{
       {
         instExNumb++;
         saida += "E/S iniciada em " + programName + "\n";
-        
+        blocked.add(bcp);
+        bcp.processStatus = 1;
+        bcp.blockedCounter = 2;
       }
       else if(instruction.equals("COM"))
       {
