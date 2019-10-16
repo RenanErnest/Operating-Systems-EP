@@ -12,7 +12,7 @@ public class Escalonador{
   String output = "";
   String[] memory = new String[220]; // 22 lines per program
   int maxPriorityQueue = 0;
-  int swapTotalTime, totalInstructionPerQuantum, swapCounter = 0;
+  int totalInstructionPerQuantum, swapCounter = 0;
   
   public static void main(String [] args)
   {
@@ -21,7 +21,14 @@ public class Escalonador{
     while(!end)
     {
       Run();
-      // Are all the process ended ?
+    }
+    float mediaTrocas = swapCounter/10;
+    float mediaQuantum = totalInstructionPerQuantum/swapCounter;
+    saida += "MEDIA DE TROCAS: " + mediaTrocas + "\n";
+    saida += "MEDIA DE INSTRUCOES: " + mediaQuantum + "\n";
+    
+    try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("log" + quantum + ".txt"), "utf-8"))) {
+      writer.write(saida);
     }
   }
 
@@ -66,7 +73,7 @@ public class Escalonador{
               return;
             }
           }
-          else return; // The loop in the main function will call Run again    
+          else BlockTimeCounter(); // There's only blocked processes   
           }
     }
     if(bcp == null) return; // Check
@@ -79,6 +86,7 @@ public class Escalonador{
     this.credits = bcp.credits;
     
     bcp.processStatus = 1; // Running 
+    saida += "Executando " + programName + "\n";
     int instExNumb = 0; // Number of executed instructions
     int tempQuantum = programQuantum;
     if(queue == 0) tempQuantum = queue; // 0 queue uses round robin with 1 quantum
@@ -86,20 +94,6 @@ public class Escalonador{
     {
        instruction = memory[textSegmentIndex + PC];
        PC++;
-      
-       for(BCP o : blocked) // Decrease the time to complete E/S for all blocked process
-       {
-         if(o.blockedCounter == 2)
-         {
-           o.blockedCounter--;
-         }
-         else 
-         {
-           readyList.get(o.credits).add(o); // Add the BCP to the ready queue
-           o.processStatus = 0; // Ready
-           blocked.remove(o); 
-         }
-       }
       
       if((aux = instruction.indexOf('=')) != -1)
       {
@@ -131,6 +125,7 @@ public class Escalonador{
       }
     }
       if(bcp.processStatus != 2) bcp.processStatus = 0; // Ready except by E/S
+      saida += "Interrompendo " + programName + " após " + instExNumb + " instruções\n";
     
       totalInstructionPerQuantum += instExNumb;
       swapCounter++;
@@ -143,11 +138,29 @@ public class Escalonador{
       bcp.Y = this.Y;
       bcp.credits = this.credits;
       readyList.get(credits).addFirst(bcp); // The process had most priority before
+    
+      BlockTimeCounter();
   }
 
+  void BlockTimeCounter() 
+  {
+    for(BCP o : blocked) // Decrease the time to complete E/S for all blocked process
+       {
+         if(o.blockedCounter == 2)
+         {
+           o.blockedCounter--;
+         }
+         else 
+         {
+           readyList.get(o.credits).add(o); // Add the BCP to the ready queue
+           o.processStatus = 0; // Ready
+           blocked.remove(o); 
+         }
+       }
+  }
   void Init()
   {
-    priorityFile = new File("prioridades.txt"); 
+    priorityFile = new File("processos/prioridades.txt"); 
     BufferedReader brGetMax = new BufferedReader(new FileReader(priorityFile)); 
     
     for(int i = 0; i < 10; i++) // Get the maximum priority
@@ -158,7 +171,7 @@ public class Escalonador{
     brGetMax.close();
     
     for(int i = 0; i <= maxPriorityQueue; i++) readyList.add(new LinkedList<BCP>()); // Add a set of lists from 0 to maxPriorityQueue
-    quantumFile = new File("quantum.txt");  
+    quantumFile = new File("processos/quantum.txt");  
     BufferedReader br = new BufferedReader(new FileReader(priorityFile)); 
     BufferedReader qbr = new BufferedReader(new FileReader(quantumFile)); 
     quantum = Integer.parseInt(qbr.readLine());
@@ -166,7 +179,7 @@ public class Escalonador{
     for(int i = 1; i < 11; i++) // Read each command block
     {
       String index = (i < 10 ? "0" : "") + i;
-      processFiles[i-1] = new File(index + ".txt");  
+      processFiles[i-1] = new File("processos/" + index + ".txt");  
       BufferedReader pbr = new BufferedReader(new FileReader(processFiles[i-1])); 
       int processPriority = Integer.parseInt(br.readLine());
       BCP newProcess = new BCP(pbr.readLine(), processPriority, (i-1) * 22); // Create BCP with name, priority of the process and textSegmentIndex
