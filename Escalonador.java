@@ -131,7 +131,11 @@ public class Escalonador{
         return;
       }
     }
-      if(bcp.processStatus != 2) bcp.processStatus = 0; // Ready except by E/S
+      if(bcp.processStatus != 2) 
+      {
+        bcp.processStatus = 0; // Ready except by E/S
+        readyList.get(credits).addFirst(bcp); // The process had most priority before
+      }
       output += "Interrompendo " + programName + " após " + instExNumb + " instruções\n";
     
       totalInstructionPerQuantum += instExNumb;
@@ -145,7 +149,6 @@ public class Escalonador{
       bcp.X = X;
       bcp.Y = Y;
       bcp.credits = credits;
-      readyList.get(credits).addFirst(bcp); // The process had most priority before
     
       BlockTimeCounter();
   }
