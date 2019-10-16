@@ -19,13 +19,4 @@ Y=5
 COM
 X=10
 X=12
-Y=3
-COM
-COM
-COM
-E/S
-COM
-X=3
-COM
-Y=5
 SAIDA
