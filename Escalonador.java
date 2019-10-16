@@ -1,48 +1,54 @@
 import java.util.Collections;
-import java.util;
+import java.util.*;
+import java.io.*;
 
 public class Escalonador{
-  File priorityFile, quantumFile;
-  File [] processFiles = new File[10];
+  static File priorityFile, quantumFile;
+  static File [] processFiles = new File[10];
 
-  LinkedList<BCP> runningProcessTable = new LinkedList<BCP>(); // Store all BCP references
-  LinkedList<LinkedList<BCP>> readyList; // List of ready queues
-  LinkedList<BCP> blocked = new LinkedList<BCP>(); // Simple FIFO for blocked process
-  int X, Y, quantum, programName, programQuantum, PC, textSegmentIndex, credits;
-  String output = "";
-  String[] memory = new String[220]; // 22 lines per program
-  int maxPriorityQueue = 0;
-  int totalInstructionPerQuantum, swapCounter = 0;
-  
+  static LinkedList<BCP> runningProcessTable = new LinkedList<BCP>(); // Store all BCP references
+  static LinkedList<LinkedList<BCP>> readyList = new LinkedList<LinkedList<BCP>>(); // List of ready queues
+  static LinkedList<BCP> blocked = new LinkedList<BCP>(); // Simple FIFO for blocked process
+  static int X, Y, quantum, programQuantum, PC, textSegmentIndex, credits;
+  static String programName;
+  static String output = "";
+  static String[] memory = new String[220]; // 22 lines per program
+  static int maxPriorityQueue = 0;
+  static int totalInstructionPerQuantum, swapCounter = 0;
+  static boolean end = false;
+
   public static void main(String [] args)
   {
-    bool end = false; 
-    Init();  
+    try{
+      Init();
+    } catch(Exception e) { e.printStackTrace(); }  
     while(!end)
     {
       Run();
     }
     float mediaTrocas = swapCounter/10;
     float mediaQuantum = totalInstructionPerQuantum/swapCounter;
-    saida += "MEDIA DE TROCAS: " + mediaTrocas + "\n";
-    saida += "MEDIA DE INSTRUCOES: " + mediaQuantum + "\n";
+    output += "MEDIA DE TROCAS: " + mediaTrocas + "\n";
+    output += "MEDIA DE INSTRUCOES: " + mediaQuantum + "\n";
     
     try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("log" + quantum + ".txt"), "utf-8"))) {
-      writer.write(saida);
+      writer.write(output);
     }
+    catch(Exception e) { System.out.println("Error: it cannot has access to write the answer file!"); }
   }
 
-  void Run()
+  static void Run()
   {
     // Run a process quantum times then return
     String instruction;
     int aux = 0;
     int queue = maxPriorityQueue;
+    BCP bcp = null;
 
     for(int i = 0; i < maxPriorityQueue; i++)
     {
         try {
-          BCP bcp =  readyList.get(queue).removeFirst(); // Pick the first process of the max priority queue
+          bcp =  readyList.get(queue).removeFirst(); // Pick the first process of the max priority queue
           if(bcp != null) break;
           } catch (NoSuchElementException e) {
           if(queue > 0) // No process in this queue. Note that we cannot decrease max priority because some high priority program can be blocked
@@ -57,7 +63,7 @@ public class Escalonador{
           }
           else if(queue == 0) // Are all the running process in the 0 queue ?
           {
-            bool allZero = true;
+            boolean allZero = true;
             for(BCP o : runningProcessTable)
             {
               if(o.credits > 0) allZero = false;
@@ -77,16 +83,16 @@ public class Escalonador{
           }
     }
     if(bcp == null) return; // Check
-    this.PC = bcp.PC;                                 // Get the program context
-    this.programQuantum = bcp.programQuantum;
-    this.X = bcp.X;
-    this.Y = bcp.Y;
-    this.programName = bcp.programName;
-    this.textSegmentIndex = bcp.textSegmentIndex;
-    this.credits = bcp.credits;
+    PC = bcp.PC;                                 // Get the program context
+    programQuantum = bcp.programQuantum;
+    X = bcp.X;
+    Y = bcp.Y;
+    programName = bcp.programName;
+    textSegmentIndex = bcp.textSegmentIndex;
+    credits = bcp.credits;
     
     bcp.processStatus = 1; // Running 
-    saida += "Executando " + programName + "\n";
+    output += "Executando " + programName + "\n";
     int instExNumb = 0; // Number of executed instructions
     int tempQuantum = programQuantum;
     if(queue == 0) tempQuantum = queue; // 0 queue uses round robin with 1 quantum
@@ -95,6 +101,7 @@ public class Escalonador{
        instruction = memory[textSegmentIndex + PC];
        PC++;
       
+      if(instruction == null) break;
       if((aux = instruction.indexOf('=')) != -1)
       {
         instExNumb++;
@@ -104,7 +111,7 @@ public class Escalonador{
       else if(instruction.equals("E/S"))
       {
         instExNumb++;
-        saida += "E/S iniciada em " + programName + "\n";
+        output += "E/S iniciada em " + programName + "\n";
         blocked.add(bcp);
         bcp.processStatus = 2; // Blocked
         bcp.blockedCounter = 2;
@@ -117,7 +124,7 @@ public class Escalonador{
       else if(instruction.equals("SAIDA"))
       {
         instExNumb++;
-        saida += programName + " terminado. X=" + X + ". Y=" + Y +".\n";
+        output += programName + " terminado. X=" + X + ". Y=" + Y +".\n";
         totalInstructionPerQuantum += instExNumb;
         swapCounter++;
         runningProcessTable.remove(bcp); // This program isn't running anymore
@@ -125,24 +132,25 @@ public class Escalonador{
       }
     }
       if(bcp.processStatus != 2) bcp.processStatus = 0; // Ready except by E/S
-      saida += "Interrompendo " + programName + " após " + instExNumb + " instruções\n";
+      output += "Interrompendo " + programName + " após " + instExNumb + " instruções\n";
     
       totalInstructionPerQuantum += instExNumb;
       swapCounter++;
       credits -= 2;
+      if (credits < 0) credits = 0;
       programQuantum++;
     
-      bcp.PC = this.PC;                           // Update the process BCP and add it to the ready queue
-      bcp.programQuantum = this.programQuantum;
-      bcp.X = this.X;
-      bcp.Y = this.Y;
-      bcp.credits = this.credits;
+      bcp.PC = PC;                           // Update the process BCP and add it to the ready queue
+      bcp.programQuantum = programQuantum;
+      bcp.X = X;
+      bcp.Y = Y;
+      bcp.credits = credits;
       readyList.get(credits).addFirst(bcp); // The process had most priority before
     
       BlockTimeCounter();
   }
 
-  void BlockTimeCounter() 
+  static void BlockTimeCounter() 
   {
     for(BCP o : blocked) // Decrease the time to complete E/S for all blocked process
        {
@@ -158,17 +166,20 @@ public class Escalonador{
          }
        }
   }
-  void Init()
+  static void Init() throws Exception
   {
     priorityFile = new File("processos/prioridades.txt"); 
-    BufferedReader brGetMax = new BufferedReader(new FileReader(priorityFile)); 
-    
+    BufferedReader brGetMax = null;
+    try{
+      brGetMax = new BufferedReader(new FileReader(priorityFile));
+    } catch(Exception e) { System.out.println("Error: input files could not be open"); e.printStackTrace(); }
+
     for(int i = 0; i < 10; i++) // Get the maximum priority
     {
        int processPriority = Integer.parseInt(brGetMax.readLine());
        if(processPriority > maxPriorityQueue) maxPriorityQueue = processPriority;
     }
-    brGetMax.close();
+    if(brGetMax != null) brGetMax.close();
     
     for(int i = 0; i <= maxPriorityQueue; i++) readyList.add(new LinkedList<BCP>()); // Add a set of lists from 0 to maxPriorityQueue
     quantumFile = new File("processos/quantum.txt");  
@@ -178,7 +189,7 @@ public class Escalonador{
     
     for(int i = 1; i < 11; i++) // Read each command block
     {
-      String index = (i < 10 ? "0" : "") + i;
+      String index = (i < 10 ? "0" : "") + i; //adjusting the number format from for example 1 to 01
       processFiles[i-1] = new File("processos/" + index + ".txt");  
       BufferedReader pbr = new BufferedReader(new FileReader(processFiles[i-1])); 
       int processPriority = Integer.parseInt(br.readLine());
@@ -188,7 +199,7 @@ public class Escalonador{
       pbr.close();
     }
     
-    for(int i = maxPriorityQueue; i >= 0; i--) 
+    for(int i = maxPriorityQueue; i >= 0; i--) //adding the process from the max priority queue into the running process table, that means the next processes that will run
     {
       LinkedList<BCP> list = readyList.get(i);
       for(BCP o : list) 
