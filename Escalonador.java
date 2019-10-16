@@ -12,7 +12,7 @@ public class Escalonador{
   static int X, Y, quantum, programQuantum, PC, textSegmentIndex, credits;
   static String programName;
   static String output = "";
-  static String[] memory = new String[220]; // 22 lines per program
+  static String[] memory = new String[210]; // 22 lines per program
   static int maxPriorityQueue = 0;
   static int totalInstructionPerQuantum, swapCounter = 0;
   static boolean end = false;
@@ -193,9 +193,9 @@ public class Escalonador{
       processFiles[i-1] = new File("processos/" + index + ".txt");  
       BufferedReader pbr = new BufferedReader(new FileReader(processFiles[i-1])); 
       int processPriority = Integer.parseInt(br.readLine());
-      BCP newProcess = new BCP(pbr.readLine(), processPriority, (i-1) * 22); // Create BCP with name, priority of the process and textSegmentIndex
+      BCP newProcess = new BCP(pbr.readLine(), processPriority, (i-1) * 21); // Create BCP with name, priority of the process and textSegmentIndex
       readyList.get(processPriority).add(newProcess); // The new process is ready to execute 
-      for(int j = 0; j < 22; j++) memory[(i-1) * 22 + j] = pbr.readLine(); // Fill the memory with program code or null if the end was reached
+      for(int j = 0; j < 21; j++) memory[(i-1) * 21 + j] = pbr.readLine(); // Fill the memory with program code or null if the end was reached
       pbr.close();
     }
     
