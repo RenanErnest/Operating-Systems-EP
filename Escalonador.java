@@ -95,7 +95,7 @@ public class Escalonador{
     output += "Executando " + programName + "\n";
     int instExNumb = 0; // Number of executed instructions
     int tempQuantum = programQuantum;
-    if(queue == 0) tempQuantum = queue; // 0 queue uses round robin with 1 quantum
+    if(queue == 0) tempQuantum = 1; // 0 queue uses round robin with 1 quantum
     for(int j = 0; j < tempQuantum; j++) // This same program will run quantum times
     {
        instruction = memory[textSegmentIndex + PC];
