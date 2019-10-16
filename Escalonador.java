@@ -138,7 +138,7 @@ public class Escalonador{
       swapCounter++;
       credits -= 2;
       if (credits < 0) credits = 0;
-      programQuantum++;
+      if (programQuantum < quantum) programQuantum++; // Limit is quantum
     
       bcp.PC = PC;                           // Update the process BCP and add it to the ready queue
       bcp.programQuantum = programQuantum;
