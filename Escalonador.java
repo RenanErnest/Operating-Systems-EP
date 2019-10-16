@@ -1,23 +1,27 @@
 import java.util.Collections;
 import java.util.*;
+import java.io.*;
 
 public class Escalonador{
   static File priorityFile, quantumFile;
   static File [] processFiles = new File[10];
 
   static LinkedList<BCP> runningProcessTable = new LinkedList<BCP>(); // Store all BCP references
-  static LinkedList<LinkedList<BCP>> readyList; // List of ready queues
+  static LinkedList<LinkedList<BCP>> readyList = new LinkedList<LinkedList<BCP>>(); // List of ready queues
   static LinkedList<BCP> blocked = new LinkedList<BCP>(); // Simple FIFO for blocked process
-  static int X, Y, quantum, programName, programQuantum, PC, textSegmentIndex, credits;
+  static int X, Y, quantum, programQuantum, PC, textSegmentIndex, credits;
+  static String programName;
   static String output = "";
   static String[] memory = new String[220]; // 22 lines per program
   static int maxPriorityQueue = 0;
   static int totalInstructionPerQuantum, swapCounter = 0;
-  
+  static boolean end = false;
+
   public static void main(String [] args)
   {
-    boolean end = false; 
-    Init();  
+    try{
+      Init();
+    } catch(Exception e) { e.printStackTrace(); }  
     while(!end)
     {
       Run();
@@ -30,6 +34,7 @@ public class Escalonador{
     try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("log" + quantum + ".txt"), "utf-8"))) {
       writer.write(output);
     }
+    catch(Exception e) { System.out.println("Error: it cannot has access to write the answer file!"); }
   }
 
   static void Run()
@@ -38,11 +43,12 @@ public class Escalonador{
     String instruction;
     int aux = 0;
     int queue = maxPriorityQueue;
+    BCP bcp = null;
 
     for(int i = 0; i < maxPriorityQueue; i++)
     {
         try {
-          BCP bcp =  readyList.get(queue).removeFirst(); // Pick the first process of the max priority queue
+          bcp =  readyList.get(queue).removeFirst(); // Pick the first process of the max priority queue
           if(bcp != null) break;
           } catch (NoSuchElementException e) {
           if(queue > 0) // No process in this queue. Note that we cannot decrease max priority because some high priority program can be blocked
@@ -57,7 +63,7 @@ public class Escalonador{
           }
           else if(queue == 0) // Are all the running process in the 0 queue ?
           {
-            bool allZero = true;
+            boolean allZero = true;
             for(BCP o : runningProcessTable)
             {
               if(o.credits > 0) allZero = false;
@@ -95,6 +101,7 @@ public class Escalonador{
        instruction = memory[textSegmentIndex + PC];
        PC++;
       
+      if(instruction == null) break;
       if((aux = instruction.indexOf('=')) != -1)
       {
         instExNumb++;
@@ -130,6 +137,7 @@ public class Escalonador{
       totalInstructionPerQuantum += instExNumb;
       swapCounter++;
       credits -= 2;
+      if (credits < 0) credits = 0;
       programQuantum++;
     
       bcp.PC = PC;                           // Update the process BCP and add it to the ready queue
@@ -158,17 +166,20 @@ public class Escalonador{
          }
        }
   }
-  static void Init()
+  static void Init() throws Exception
   {
     priorityFile = new File("processos/prioridades.txt"); 
-    BufferedReader brGetMax = new BufferedReader(new FileReader(priorityFile)); 
-    
+    BufferedReader brGetMax = null;
+    try{
+      brGetMax = new BufferedReader(new FileReader(priorityFile));
+    } catch(Exception e) { System.out.println("Error: input files could not be open"); e.printStackTrace(); }
+
     for(int i = 0; i < 10; i++) // Get the maximum priority
     {
        int processPriority = Integer.parseInt(brGetMax.readLine());
        if(processPriority > maxPriorityQueue) maxPriorityQueue = processPriority;
     }
-    brGetMax.close();
+    if(brGetMax != null) brGetMax.close();
     
     for(int i = 0; i <= maxPriorityQueue; i++) readyList.add(new LinkedList<BCP>()); // Add a set of lists from 0 to maxPriorityQueue
     quantumFile = new File("processos/quantum.txt");  

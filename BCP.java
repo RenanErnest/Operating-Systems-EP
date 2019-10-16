@@ -5,6 +5,7 @@ public class BCP{
   public int X = 0, Y = 0;
   public int blockedCounter;
   public int textSegmentIndex;
+  public int programQuantum;
   public String programName;
   public int credits;
 
