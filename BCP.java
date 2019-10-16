@@ -1,10 +1,18 @@
-class BCP{
-    int pc; //program counter
-    int state; //process's state(0-blocked;1-ready;2-executing)
-    int priority; //process's priority
-    /*general registers's content*/
-    int X;
-    int Y;
-    /* */
-    String textSegment; //reference to program's text segment
+public class BCP{
+  public int PC;
+  public int processStatus;
+  public int priority;
+  public int X = 0, Y = 0;
+  public int blockedCounter;
+  public int textSegmentIndex;
+  public String programName;
+  public int credits;
+
+  public BCP(String name, int priority, int textSegmentIndex)
+  {
+    this.priority = priority;
+    this.credits = priority;
+    programName = name;
+    this.textSegmentIndex = textSegmentIndex;
+  }
 }
