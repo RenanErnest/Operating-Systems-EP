@@ -12,7 +12,7 @@ Y=5
 E/S
 COM
 COM
-COm
+COM
 E/S
 X=3
 X=91
