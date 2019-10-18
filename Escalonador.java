@@ -12,7 +12,7 @@ public class Escalonador{
   static int X, Y, quantum, programQuantum, PC, textSegmentIndex, credits;
   static String programName;
   static String output = "";
-  static String[] memory = new String[210]; // 22 lines per program
+  static String[] memory = new String[420]; // 22 lines per program
   static int maxPriorityQueue = 0;
   static int totalInstructionPerQuantum, swapCounter = 0;
   static boolean end = false;
@@ -96,7 +96,7 @@ public class Escalonador{
     int instExNumb = 0; // Number of executed instructions
     int tempQuantum = programQuantum;
     if(queue == 0) tempQuantum = 1; // 0 queue uses round robin with 1 quantum
-    for(int j = 0; j < tempQuantum; j++) // This same program will run quantum times
+    for(int j = 0; j < tempQuantum * quantum; j++) // This same program will run quantum times
     {
        instruction = memory[textSegmentIndex + PC];
        PC++;
@@ -142,7 +142,7 @@ public class Escalonador{
       swapCounter++;
       credits -= 2;
       if (credits < 0) credits = 0;
-      if (programQuantum < quantum) programQuantum++; // Limit is quantum
+      programQuantum++; // Limit is quantum
     
       bcp.PC = PC;                           // Update the process BCP and add it to the ready queue
       bcp.programQuantum = programQuantum;
@@ -196,9 +196,9 @@ public class Escalonador{
       processFiles[i-1] = new File("processos/" + index + ".txt");  
       BufferedReader pbr = new BufferedReader(new FileReader(processFiles[i-1])); 
       int processPriority = Integer.parseInt(br.readLine());
-      BCP newProcess = new BCP(pbr.readLine(), processPriority, (i-1) * 21); // Create BCP with name, priority of the process and textSegmentIndex
+      BCP newProcess = new BCP(pbr.readLine(), processPriority, (i-1) * 42); // Create BCP with name, priority of the process and textSegmentIndex
       readyList.get(processPriority).add(newProcess); // The new process is ready to execute 
-      for(int j = 0; j < 21; j++) memory[(i-1) * 21 + j] = pbr.readLine(); // Fill the memory with program code or null if the end was reached
+      for(int j = 0; j < 42; j++) memory[(i-1) * 42 + j] = pbr.readLine(); // Fill the memory with program code or null if the end was reached
       pbr.close();
     }
     
