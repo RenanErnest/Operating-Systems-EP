@@ -33,8 +33,8 @@ public class Escalonador{
     {
       Run();
     }
-    float mediaTrocas = swapCounter/10;
-    float mediaQuantum = totalInstructionExecuted/totalQuantumUsed;
+    double mediaTrocas = (double)swapCounter/10.0;
+    double mediaQuantum = (double)totalInstructionExecuted/(double)totalQuantumUsed;
     output += "MEDIA DE TROCAS: " + mediaTrocas + "\n";
     output += "MEDIA DE INSTRUCOES: " + mediaQuantum + "\n";
     output += "QUANTUM: " + quantum + "\n";
@@ -108,17 +108,16 @@ public class Escalonador{
     {
       instruction = memory[textSegmentIndex + PC];
       PC++;
+      instExNumb++;
       
       if(instruction == null) break;
       if((aux = instruction.indexOf('=')) != -1)
       {
-        instExNumb++;
         if(instruction.charAt(0) == 'X') X = Character.getNumericValue(instruction.charAt(2));
         else Y = Character.getNumericValue(instruction.charAt(2));
       }
       else if(instruction.equals("E/S"))
       {
-        instExNumb++;
         output += "E/S iniciada em " + programName + "\n";
         blocked.add(bcp);
         bcp.processStatus = 2; // Blocked
@@ -127,16 +126,15 @@ public class Escalonador{
       }
       else if(instruction.equals("COM"))
       {
-        instExNumb++;
+
       }
       else if(instruction.equals("SAIDA"))
       {
-        instExNumb++;
         output += programName + " terminado. X=" + X + ". Y=" + Y +".\n";
         totalInstructionExecuted += instExNumb;
         swapCounter++;
         runningProcessTable.remove(bcp); // This program isn't running anymore
-        totalQuantumUsed += Math.ceil(instExNumb/quantum);
+        totalQuantumUsed++;
         return;
       }
     }
@@ -148,7 +146,7 @@ public class Escalonador{
     output += "Interrompendo " + programName + " ap�s " + instExNumb + " instru��es\n";
   
     totalInstructionExecuted += instExNumb;
-    totalQuantumUsed += Math.ceil(instExNumb/quantum); //store only the number of quantums used -> ceil(qtdInstructionsExecuted / number of instructions per quantum)
+    totalQuantumUsed++; //store only the number of quantums used -> ceil(qtdInstructionsExecuted / number of instructions per quantum)
     swapCounter++;
     credits -= 2;
     if (credits < 0) credits = 0;
