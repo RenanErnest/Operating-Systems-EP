@@ -1,0 +1,283 @@
+Carregando TESTE-3
+Carregando TESTE-5
+Carregando TESTE-7
+Carregando TESTE-2
+Carregando TESTE-4
+Carregando TESTE-8
+Carregando TESTE-9
+Carregando TESTE-6
+Carregando TESTE-10
+Carregando TESTE-1
+Executando TESTE-3
+Interrompendo TESTE-3 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-3
+Interrompendo TESTE-3 apï¿½s 6 instruï¿½ï¿½es
+Executando TESTE-5
+E/S iniciada em TESTE-5
+Interrompendo TESTE-5 apï¿½s 2 instruï¿½ï¿½es
+Executando TESTE-7
+Interrompendo TESTE-7 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-7
+E/S iniciada em TESTE-7
+Interrompendo TESTE-7 apï¿½s 1 instruï¿½ï¿½es
+Executando TESTE-2
+Interrompendo TESTE-2 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-2
+E/S iniciada em TESTE-2
+Interrompendo TESTE-2 apï¿½s 2 instruï¿½ï¿½es
+Executando TESTE-4
+E/S iniciada em TESTE-4
+Interrompendo TESTE-4 apï¿½s 2 instruï¿½ï¿½es
+Executando TESTE-8
+Interrompendo TESTE-8 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-8
+Interrompendo TESTE-8 apï¿½s 6 instruï¿½ï¿½es
+Executando TESTE-9
+E/S iniciada em TESTE-9
+Interrompendo TESTE-9 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-3
+Interrompendo TESTE-3 apï¿½s 9 instruï¿½ï¿½es
+Executando TESTE-6
+Interrompendo TESTE-6 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-6
+E/S iniciada em TESTE-6
+Interrompendo TESTE-6 apï¿½s 1 instruï¿½ï¿½es
+Executando TESTE-10
+Interrompendo TESTE-10 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-10
+Interrompendo TESTE-10 apï¿½s 6 instruï¿½ï¿½es
+Executando TESTE-5
+E/S iniciada em TESTE-5
+Interrompendo TESTE-5 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-8
+Interrompendo TESTE-8 apï¿½s 9 instruï¿½ï¿½es
+Executando TESTE-1
+Interrompendo TESTE-1 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-1
+E/S iniciada em TESTE-1
+Interrompendo TESTE-1 apï¿½s 2 instruï¿½ï¿½es
+Executando TESTE-4
+E/S iniciada em TESTE-4
+Interrompendo TESTE-4 apï¿½s 4 instruï¿½ï¿½es
+Executando TESTE-9
+Interrompendo TESTE-9 apï¿½s 6 instruï¿½ï¿½es
+Executando TESTE-9
+E/S iniciada em TESTE-9
+Interrompendo TESTE-9 apï¿½s 5 instruï¿½ï¿½es
+Executando TESTE-8
+Interrompendo TESTE-8 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-8
+Interrompendo TESTE-8 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-8
+Interrompendo TESTE-8 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-8
+Interrompendo TESTE-8 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-8
+Interrompendo TESTE-8 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-8
+Interrompendo TESTE-8 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-8
+Interrompendo TESTE-8 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-8
+TESTE-8 terminado. X=1. Y=3.
+Executando TESTE-10
+E/S iniciada em TESTE-10
+Interrompendo TESTE-10 apï¿½s 2 instruï¿½ï¿½es
+Executando TESTE-3
+Interrompendo TESTE-3 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-3
+Interrompendo TESTE-3 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-3
+TESTE-3 terminado. X=9. Y=1.
+Executando TESTE-7
+Interrompendo TESTE-7 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-7
+Interrompendo TESTE-7 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-7
+E/S iniciada em TESTE-7
+Interrompendo TESTE-7 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-2
+Interrompendo TESTE-2 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-2
+Interrompendo TESTE-2 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-2
+E/S iniciada em TESTE-2
+Interrompendo TESTE-2 apï¿½s 1 instruï¿½ï¿½es
+Executando TESTE-6
+Interrompendo TESTE-6 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-6
+Interrompendo TESTE-6 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-6
+E/S iniciada em TESTE-6
+Interrompendo TESTE-6 apï¿½s 1 instruï¿½ï¿½es
+Executando TESTE-5
+E/S iniciada em TESTE-5
+Interrompendo TESTE-5 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-1
+Interrompendo TESTE-1 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-1
+E/S iniciada em TESTE-1
+Interrompendo TESTE-1 apï¿½s 2 instruï¿½ï¿½es
+Executando TESTE-4
+Interrompendo TESTE-4 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-4
+E/S iniciada em TESTE-4
+Interrompendo TESTE-4 apï¿½s 2 instruï¿½ï¿½es
+Executando TESTE-9
+Interrompendo TESTE-9 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-9
+Interrompendo TESTE-9 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-9
+Interrompendo TESTE-9 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-9
+E/S iniciada em TESTE-9
+Interrompendo TESTE-9 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-10
+Interrompendo TESTE-10 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-10
+Interrompendo TESTE-10 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-10
+Interrompendo TESTE-10 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-10
+Interrompendo TESTE-10 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-10
+E/S iniciada em TESTE-10
+Interrompendo TESTE-10 apï¿½s 2 instruï¿½ï¿½es
+Executando TESTE-7
+Interrompendo TESTE-7 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-7
+Interrompendo TESTE-7 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-7
+Interrompendo TESTE-7 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-7
+E/S iniciada em TESTE-7
+Interrompendo TESTE-7 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-2
+Interrompendo TESTE-2 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-2
+E/S iniciada em TESTE-2
+Interrompendo TESTE-2 apï¿½s 2 instruï¿½ï¿½es
+Executando TESTE-6
+Interrompendo TESTE-6 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-6
+E/S iniciada em TESTE-6
+Interrompendo TESTE-6 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-5
+Interrompendo TESTE-5 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-5
+E/S iniciada em TESTE-5
+Interrompendo TESTE-5 apï¿½s 2 instruï¿½ï¿½es
+Executando TESTE-1
+Interrompendo TESTE-1 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-1
+Interrompendo TESTE-1 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-1
+Interrompendo TESTE-1 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-1
+E/S iniciada em TESTE-1
+Interrompendo TESTE-1 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-4
+Interrompendo TESTE-4 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-4
+E/S iniciada em TESTE-4
+Interrompendo TESTE-4 apï¿½s 1 instruï¿½ï¿½es
+Executando TESTE-9
+Interrompendo TESTE-9 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-9
+TESTE-9 terminado. X=3. Y=4.
+Executando TESTE-10
+Interrompendo TESTE-10 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-10
+TESTE-10 terminado. X=3. Y=5.
+Executando TESTE-7
+Interrompendo TESTE-7 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-7
+TESTE-7 terminado. X=3. Y=5.
+Executando TESTE-2
+Interrompendo TESTE-2 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-2
+E/S iniciada em TESTE-2
+Interrompendo TESTE-2 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-6
+Interrompendo TESTE-6 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-6
+Interrompendo TESTE-6 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-6
+Interrompendo TESTE-6 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-6
+E/S iniciada em TESTE-6
+Interrompendo TESTE-6 apï¿½s 1 instruï¿½ï¿½es
+Executando TESTE-5
+E/S iniciada em TESTE-5
+Interrompendo TESTE-5 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-1
+Interrompendo TESTE-1 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-1
+Interrompendo TESTE-1 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-1
+TESTE-1 terminado. X=1. Y=2.
+Executando TESTE-4
+Interrompendo TESTE-4 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-4
+E/S iniciada em TESTE-4
+Interrompendo TESTE-4 apï¿½s 1 instruï¿½ï¿½es
+Executando TESTE-2
+Interrompendo TESTE-2 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-2
+Interrompendo TESTE-2 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-2
+E/S iniciada em TESTE-2
+Interrompendo TESTE-2 apï¿½s 2 instruï¿½ï¿½es
+Executando TESTE-6
+Interrompendo TESTE-6 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-6
+E/S iniciada em TESTE-6
+Interrompendo TESTE-6 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-5
+Interrompendo TESTE-5 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-5
+Interrompendo TESTE-5 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-5
+E/S iniciada em TESTE-5
+Interrompendo TESTE-5 apï¿½s 1 instruï¿½ï¿½es
+Executando TESTE-4
+E/S iniciada em TESTE-4
+Interrompendo TESTE-4 apï¿½s 1 instruï¿½ï¿½es
+Executando TESTE-2
+Interrompendo TESTE-2 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-2
+TESTE-2 terminado. X=5. Y=1.
+Executando TESTE-6
+Interrompendo TESTE-6 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-6
+TESTE-6 terminado. X=4. Y=6.
+Executando TESTE-5
+E/S iniciada em TESTE-5
+Interrompendo TESTE-5 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-4
+Interrompendo TESTE-4 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-4
+E/S iniciada em TESTE-4
+Interrompendo TESTE-4 apï¿½s 1 instruï¿½ï¿½es
+Executando TESTE-5
+Interrompendo TESTE-5 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-5
+E/S iniciada em TESTE-5
+Interrompendo TESTE-5 apï¿½s 2 instruï¿½ï¿½es
+Executando TESTE-4
+Interrompendo TESTE-4 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-4
+E/S iniciada em TESTE-4
+Interrompendo TESTE-4 apï¿½s 2 instruï¿½ï¿½es
+Executando TESTE-5
+E/S iniciada em TESTE-5
+Interrompendo TESTE-5 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-4
+Interrompendo TESTE-4 apï¿½s 3 instruï¿½ï¿½es
+Executando TESTE-4
+TESTE-4 terminado. X=4. Y=5.
+Executando TESTE-5
+TESTE-5 terminado. X=3. Y=4.
+MEDIA DE TROCAS: 11.6
+MEDIA DE INSTRUCOES: 2.8448275862068964
+QUANTUM: 3

@@ -6,15 +6,22 @@ public class Escalonador{
   static File priorityFile, quantumFile;
   static File [] processFiles = new File[10];
 
+  /*Tabela de processos*/
   static LinkedList<BCP> runningProcessTable = new LinkedList<BCP>(); // Store all BCP references
+  
+  /*Lista de processos prontos*/
   static LinkedList<LinkedList<BCP>> readyList = new LinkedList<LinkedList<BCP>>(); // List of ready queues
+  
+  /*Lista de processos bloqueados*/
   static LinkedList<BCP> blocked = new LinkedList<BCP>(); // Simple FIFO for blocked process
+  
   static int X, Y, quantum, programQuantum, PC, textSegmentIndex, credits;
   static String programName;
   static String output = "";
-  static String[] memory = new String[420]; // 22 lines per program
+  static int programInstructionNum = 42;
+  static String[] memory = new String[programInstructionNum*10]; // 42 lines per program
   static int maxPriorityQueue = 0;
-  static int totalInstructionPerQuantum, swapCounter = 0;
+  static int totalInstructionExecuted, totalQuantumUsed, swapCounter = 0;
   static boolean end = false;
 
   public static void main(String [] args)
@@ -26,12 +33,13 @@ public class Escalonador{
     {
       Run();
     }
-    float mediaTrocas = swapCounter/10;
-    float mediaQuantum = totalInstructionPerQuantum/swapCounter;
+    double mediaTrocas = (double)swapCounter/10.0;
+    double mediaQuantum = (double)totalInstructionExecuted/(double)totalQuantumUsed;
     output += "MEDIA DE TROCAS: " + mediaTrocas + "\n";
     output += "MEDIA DE INSTRUCOES: " + mediaQuantum + "\n";
+    output += "QUANTUM: " + quantum + "\n";
     
-    try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("log" + quantum + ".txt"), "utf-8"))) {
+    try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("log" + quantum + ".txt"), "UTF-8"))) {
       writer.write(output);
     }
     catch(Exception e) { System.out.println("Error: it cannot has access to write the answer file!"); }
@@ -98,19 +106,18 @@ public class Escalonador{
     if(queue == 0) tempQuantum = 1; // 0 queue uses round robin with 1 quantum
     for(int j = 0; j < tempQuantum * quantum; j++) // This same program will run quantum times
     {
-       instruction = memory[textSegmentIndex + PC];
-       PC++;
+      instruction = memory[textSegmentIndex + PC];
+      PC++;
+      instExNumb++;
       
       if(instruction == null) break;
       if((aux = instruction.indexOf('=')) != -1)
       {
-        instExNumb++;
         if(instruction.charAt(0) == 'X') X = Character.getNumericValue(instruction.charAt(2));
         else Y = Character.getNumericValue(instruction.charAt(2));
       }
       else if(instruction.equals("E/S"))
       {
-        instExNumb++;
         output += "E/S iniciada em " + programName + "\n";
         blocked.add(bcp);
         bcp.processStatus = 2; // Blocked
@@ -119,38 +126,38 @@ public class Escalonador{
       }
       else if(instruction.equals("COM"))
       {
-        instExNumb++;
+
       }
       else if(instruction.equals("SAIDA"))
       {
-        instExNumb++;
         output += programName + " terminado. X=" + X + ". Y=" + Y +".\n";
-        totalInstructionPerQuantum += instExNumb;
+        totalInstructionExecuted += instExNumb;
         swapCounter++;
         runningProcessTable.remove(bcp); // This program isn't running anymore
+        totalQuantumUsed++;
         return;
       }
     }
-      if(bcp.processStatus != 2) 
-      {
-        bcp.processStatus = 0; // Ready except by E/S
-        readyList.get(credits).addFirst(bcp); // The process had most priority before
-      }
-      output += "Interrompendo " + programName + " após " + instExNumb + " instruções\n";
-    
-      totalInstructionPerQuantum += instExNumb;
-      swapCounter++;
-      credits -= 2;
-      if (credits < 0) credits = 0;
-      programQuantum++; // Limit is quantum
-    
-      bcp.PC = PC;                           // Update the process BCP and add it to the ready queue
-      bcp.programQuantum = programQuantum;
-      bcp.X = X;
-      bcp.Y = Y;
-      bcp.credits = credits;
-    
-      BlockTimeCounter();
+    if(bcp.processStatus != 2) 
+    {
+      bcp.processStatus = 0; // Ready except by E/S
+      readyList.get(credits).addFirst(bcp); // The process had most priority before
+    }
+    output += "Interrompendo " + programName + " ap�s " + instExNumb + " instru��es\n";
+  
+    totalInstructionExecuted += instExNumb;
+    totalQuantumUsed++; //store only the number of quantums used -> ceil(qtdInstructionsExecuted / number of instructions per quantum)
+    swapCounter++;
+    credits -= 2;
+    if (credits < 0) credits = 0;
+    programQuantum++; // Limit is quantum
+  
+    bcp.PC = PC;                           // Update the process BCP and add it to the ready queue
+    bcp.programQuantum = programQuantum;
+    bcp.X = X;
+    bcp.Y = Y;
+    bcp.credits = credits;
+    BlockTimeCounter();
   }
 
   static void BlockTimeCounter() 
@@ -196,9 +203,10 @@ public class Escalonador{
       processFiles[i-1] = new File("processos/" + index + ".txt");  
       BufferedReader pbr = new BufferedReader(new FileReader(processFiles[i-1])); 
       int processPriority = Integer.parseInt(br.readLine());
-      BCP newProcess = new BCP(pbr.readLine(), processPriority, (i-1) * 42); // Create BCP with name, priority of the process and textSegmentIndex
-      readyList.get(processPriority).add(newProcess); // The new process is ready to execute 
-      for(int j = 0; j < 42; j++) memory[(i-1) * 42 + j] = pbr.readLine(); // Fill the memory with program code or null if the end was reached
+      BCP newProcess = new BCP(pbr.readLine(), processPriority, (i-1) * programInstructionNum); // Create BCP with name, priority of the process and textSegmentIndex
+      readyList.get(processPriority).add(newProcess); // The new process is ready to execute
+      String instruction = "";
+      for(int j = 0; j < programInstructionNum; j++) if((instruction = pbr.readLine()) != null) memory[(i-1) * programInstructionNum + j] = instruction.toUpperCase(); // Fill the memory with program code (adjusted to uppercase) or null if the end was reached
       pbr.close();
     }
     
