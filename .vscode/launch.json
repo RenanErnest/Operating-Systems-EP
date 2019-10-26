@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Escalonador",
+            "request": "launch",
+            "mainClass": "Escalonador",
+            "projectName": "Operating-Systems-EP_5e87f3fe"
+        }
+    ]
+}
