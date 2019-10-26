@@ -113,8 +113,8 @@ public class Escalonador{
       if(instruction == null) break;
       if((aux = instruction.indexOf('=')) != -1)
       {
-        if(instruction.charAt(0) == 'X') X = Character.getNumericValue(instruction.charAt(2));
-        else Y = Character.getNumericValue(instruction.charAt(2));
+        if(instruction.charAt(0) == 'X') X = Integer.parseInt(instruction.substring(2));
+        else Y = Integer.parseInt(instruction.substring(2));
       }
       else if(instruction.equals("E/S"))
       {
