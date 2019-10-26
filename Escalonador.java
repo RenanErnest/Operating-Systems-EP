@@ -162,8 +162,9 @@ public class Escalonador{
 
   static void BlockTimeCounter() 
   {
-    for(BCP o : blocked) // Decrease the time to complete E/S for all blocked process
+    for(Iterator<BCP> i = blocked.iterator(); i.hasNext();) // Decrease the time to complete E/S for all blocked process
        {
+         BCP o = i.next();
          if(o.blockedCounter == 2)
          {
            o.blockedCounter--;
@@ -172,13 +173,13 @@ public class Escalonador{
          {
            readyList.get(o.credits).add(o); // Add the BCP to the ready queue
            o.processStatus = 0; // Ready
-           blocked.remove(o); 
+           i.remove(); 
          }
        }
   }
   static void Init() throws Exception
   {
-    priorityFile = new File("processos/prioridades.txt"); 
+    priorityFile = new File("processos2/prioridades.txt"); 
     BufferedReader brGetMax = null;
     try{
       brGetMax = new BufferedReader(new FileReader(priorityFile));
@@ -192,7 +193,7 @@ public class Escalonador{
     if(brGetMax != null) brGetMax.close();
     
     for(int i = 0; i <= maxPriorityQueue; i++) readyList.add(new LinkedList<BCP>()); // Add a set of lists from 0 to maxPriorityQueue
-    quantumFile = new File("processos/quantum.txt");  
+    quantumFile = new File("processos2/quantum.txt");  
     BufferedReader br = new BufferedReader(new FileReader(priorityFile)); 
     BufferedReader qbr = new BufferedReader(new FileReader(quantumFile)); 
     quantum = Integer.parseInt(qbr.readLine());
@@ -200,7 +201,7 @@ public class Escalonador{
     for(int i = 1; i < 11; i++) // Read each command block
     {
       String index = (i < 10 ? "0" : "") + i; //adjusting the number format from for example 1 to 01
-      processFiles[i-1] = new File("processos/" + index + ".txt");  
+      processFiles[i-1] = new File("processos2/" + index + ".txt");  
       BufferedReader pbr = new BufferedReader(new FileReader(processFiles[i-1])); 
       int processPriority = Integer.parseInt(br.readLine());
       BCP newProcess = new BCP(pbr.readLine(), processPriority, (i-1) * programInstructionNum); // Create BCP with name, priority of the process and textSegmentIndex
