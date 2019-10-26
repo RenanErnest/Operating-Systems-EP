@@ -141,9 +141,9 @@ public class Escalonador{
     if(bcp.processStatus != 2) 
     {
       bcp.processStatus = 0; // Ready except by E/S
-      readyList.get(credits).addFirst(bcp); // The process had most priority before
+      readyList.get(credits).addFirst(bcp); // The process had more priority before
     }
-    output += "Interrompendo " + programName + " ap�s " + instExNumb + " instru��es\n";
+    output += "Interrompendo " + programName + " após " + instExNumb + " instruções\n";
   
     totalInstructionExecuted += instExNumb;
     totalQuantumUsed++; //store only the number of quantums used -> ceil(qtdInstructionsExecuted / number of instructions per quantum)
