@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - CPU",
+            "request": "launch",
+            "mainClass": "CPU",
+            "projectName": "Operating-Systems-EP_5e87f3fe"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Escalonador",
             "request": "launch",
             "mainClass": "Escalonador",

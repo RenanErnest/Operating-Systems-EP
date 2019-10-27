@@ -131,7 +131,7 @@ public class Escalonador{
         totalInstructionExecuted += instExNumb;
         swapCounter++;
         runningProcessTable.remove(bcp); // This program isn't running anymore
-        totalQuantumUsed++;
+        totalQuantumUsed += Math.ceil((double)instExNumb/(double)quantum);
         return;
       }
     }
@@ -143,7 +143,8 @@ public class Escalonador{
     output += "Interrompendo " + programName + " após " + instExNumb + " instruções\n";
   
     totalInstructionExecuted += instExNumb;
-    totalQuantumUsed++;
+    //System.out.println(Math.ceil(instExNumb/quantum))
+    totalQuantumUsed += Math.ceil((double)instExNumb/(double)quantum);
     swapCounter++;
     credits -= 2;
     if (credits < 0) credits = 0;
