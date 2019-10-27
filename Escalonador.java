@@ -15,7 +15,7 @@ public class Escalonador{
   /*Lista de processos bloqueados*/
   static LinkedList<BCP> blocked = new LinkedList<BCP>(); // Simple FIFO for blocked process
   
-  static int X, Y, quantum, programQuantum, PC, textSegmentIndex, credits;
+  static int X, Y, programQuantum, PC, textSegmentIndex, credits;
   static String programName;
   static String output = "";
   static int programInstructionNum = 42;
@@ -24,14 +24,14 @@ public class Escalonador{
   static int totalInstructionExecuted, totalQuantumUsed, swapCounter = 0;
   static boolean end = false;
 
-  public static void main(String [] args)
+  public static String Execution(int quantum)
   {
     try{
-      Init();
+      Init(quantum);
     } catch(Exception e) { e.printStackTrace(); }  
     while(!end)
     {
-      Run();
+      Run(quantum);
     }
     double mediaTrocas = (double)swapCounter/10.0;
     double mediaQuantum = (double)totalInstructionExecuted/(double)totalQuantumUsed;
@@ -39,13 +39,10 @@ public class Escalonador{
     output += "MEDIA DE INSTRUCOES: " + mediaQuantum + "\n";
     output += "QUANTUM: " + quantum + "\n";
     
-    try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("log" + quantum + ".txt"), "UTF-8"))) {
-      writer.write(output);
-    }
-    catch(Exception e) { System.out.println("Error: it cannot has access to write the answer file!"); }
+    return output;
   }
 
-  static void Run()
+  static void Run(int quantum)
   {
     // Run a process quantum times then return
     String instruction;
@@ -146,7 +143,7 @@ public class Escalonador{
     output += "Interrompendo " + programName + " após " + instExNumb + " instruções\n";
   
     totalInstructionExecuted += instExNumb;
-    totalQuantumUsed++; //store only the number of quantums used -> ceil(qtdInstructionsExecuted / number of instructions per quantum)
+    totalQuantumUsed++;
     swapCounter++;
     credits -= 2;
     if (credits < 0) credits = 0;
@@ -177,9 +174,22 @@ public class Escalonador{
          }
        }
   }
-  static void Init() throws Exception
+  static void Init(int quantum) throws Exception
   {
-    priorityFile = new File("processos2/prioridades.txt"); 
+    //reset variables
+    output = "";
+    processFiles = new File[10];
+    runningProcessTable = new LinkedList<BCP>(); // Store all BCP references
+    readyList = new LinkedList<LinkedList<BCP>>(); // List of ready queues
+    blocked = new LinkedList<BCP>(); // Simple FIFO for blocked process
+    X = Y = programQuantum = PC = textSegmentIndex = credits = 0;
+    programName = "";
+    memory = new String[programInstructionNum*10]; // 42 lines per program
+    maxPriorityQueue = 0;
+    totalInstructionExecuted = totalQuantumUsed = swapCounter = 0;
+    end = false;
+
+    priorityFile = new File("processos/prioridades.txt"); 
     BufferedReader brGetMax = null;
     try{
       brGetMax = new BufferedReader(new FileReader(priorityFile));
@@ -193,15 +203,15 @@ public class Escalonador{
     if(brGetMax != null) brGetMax.close();
     
     for(int i = 0; i <= maxPriorityQueue; i++) readyList.add(new LinkedList<BCP>()); // Add a set of lists from 0 to maxPriorityQueue
-    quantumFile = new File("processos2/quantum.txt");  
+    quantumFile = new File("processos/quantum.txt");  
     BufferedReader br = new BufferedReader(new FileReader(priorityFile)); 
     BufferedReader qbr = new BufferedReader(new FileReader(quantumFile)); 
-    quantum = Integer.parseInt(qbr.readLine());
+    quantum = quantum < 1 ? Integer.parseInt(qbr.readLine()) : quantum;
     
     for(int i = 1; i < 11; i++) // Read each command block
     {
       String index = (i < 10 ? "0" : "") + i; //adjusting the number format from for example 1 to 01
-      processFiles[i-1] = new File("processos2/" + index + ".txt");  
+      processFiles[i-1] = new File("processos/" + index + ".txt");  
       BufferedReader pbr = new BufferedReader(new FileReader(processFiles[i-1])); 
       int processPriority = Integer.parseInt(br.readLine());
       BCP newProcess = new BCP(pbr.readLine(), processPriority, (i-1) * programInstructionNum); // Create BCP with name, priority of the process and textSegmentIndex
