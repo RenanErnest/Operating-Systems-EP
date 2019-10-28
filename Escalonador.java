@@ -55,7 +55,8 @@ public class Escalonador{
         try {
           bcp =  readyList.get(queue).removeFirst(); // Pick the first process of the max priority queue
           if(bcp != null) break;
-          } catch (NoSuchElementException e) {
+        }
+        catch (NoSuchElementException e) {
           if(queue > 0) // No process in this queue. Note that we cannot decrease max priority because some high priority program can be blocked
           {
             queue--;
