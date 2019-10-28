@@ -9,9 +9,9 @@ Carregando TESTE-6
 Carregando TESTE-10
 Carregando TESTE-1
 Executando TESTE-3
-Interrompendo TESTE-3 apÃ³s 8 instruÃ§Ãµes
+Interrompendo TESTE-3 apÃ³s 15 instruÃ§Ãµes
 Executando TESTE-3
-Interrompendo TESTE-3 apÃ³s 16 instruÃ§Ãµes
+TESTE-3 terminado. X=91. Y=10.
 Executando TESTE-5
 E/S iniciada em TESTE-5
 Interrompendo TESTE-5 apÃ³s 2 instruÃ§Ãµes
@@ -25,30 +25,24 @@ Executando TESTE-4
 E/S iniciada em TESTE-4
 Interrompendo TESTE-4 apÃ³s 2 instruÃ§Ãµes
 Executando TESTE-8
-Interrompendo TESTE-8 apÃ³s 8 instruÃ§Ãµes
+Interrompendo TESTE-8 apÃ³s 15 instruÃ§Ãµes
 Executando TESTE-8
-Interrompendo TESTE-8 apÃ³s 16 instruÃ§Ãµes
+TESTE-8 terminado. X=12. Y=3.
 Executando TESTE-9
 E/S iniciada em TESTE-9
 Interrompendo TESTE-9 apÃ³s 3 instruÃ§Ãµes
-Executando TESTE-3
-TESTE-3 terminado. X=91. Y=10.
 Executando TESTE-6
 E/S iniciada em TESTE-6
 Interrompendo TESTE-6 apÃ³s 4 instruÃ§Ãµes
 Executando TESTE-10
-Interrompendo TESTE-10 apÃ³s 8 instruÃ§Ãµes
-Executando TESTE-10
 E/S iniciada em TESTE-10
-Interrompendo TESTE-10 apÃ³s 3 instruÃ§Ãµes
+Interrompendo TESTE-10 apÃ³s 11 instruÃ§Ãµes
 Executando TESTE-5
 E/S iniciada em TESTE-5
 Interrompendo TESTE-5 apÃ³s 3 instruÃ§Ãµes
 Executando TESTE-7
 E/S iniciada em TESTE-7
 Interrompendo TESTE-7 apÃ³s 9 instruÃ§Ãµes
-Executando TESTE-8
-TESTE-8 terminado. X=12. Y=3.
 Executando TESTE-1
 E/S iniciada em TESTE-1
 Interrompendo TESTE-1 apÃ³s 5 instruÃ§Ãµes
@@ -65,18 +59,14 @@ Executando TESTE-6
 E/S iniciada em TESTE-6
 Interrompendo TESTE-6 apÃ³s 7 instruÃ§Ãµes
 Executando TESTE-10
-Interrompendo TESTE-10 apÃ³s 8 instruÃ§Ãµes
-Executando TESTE-10
 E/S iniciada em TESTE-10
-Interrompendo TESTE-10 apÃ³s 6 instruÃ§Ãµes
+Interrompendo TESTE-10 apÃ³s 14 instruÃ§Ãµes
 Executando TESTE-5
 E/S iniciada em TESTE-5
 Interrompendo TESTE-5 apÃ³s 3 instruÃ§Ãµes
 Executando TESTE-7
-Interrompendo TESTE-7 apÃ³s 8 instruÃ§Ãµes
-Executando TESTE-7
 E/S iniciada em TESTE-7
-Interrompendo TESTE-7 apÃ³s 4 instruÃ§Ãµes
+Interrompendo TESTE-7 apÃ³s 12 instruÃ§Ãµes
 Executando TESTE-1
 E/S iniciada em TESTE-1
 Interrompendo TESTE-1 apÃ³s 5 instruÃ§Ãµes
@@ -87,10 +77,8 @@ Executando TESTE-4
 E/S iniciada em TESTE-4
 Interrompendo TESTE-4 apÃ³s 5 instruÃ§Ãµes
 Executando TESTE-9
-Interrompendo TESTE-9 apÃ³s 8 instruÃ§Ãµes
-Executando TESTE-9
 E/S iniciada em TESTE-9
-Interrompendo TESTE-9 apÃ³s 4 instruÃ§Ãµes
+Interrompendo TESTE-9 apÃ³s 12 instruÃ§Ãµes
 Executando TESTE-6
 E/S iniciada em TESTE-6
 Interrompendo TESTE-6 apÃ³s 6 instruÃ§Ãµes
@@ -102,10 +90,8 @@ Interrompendo TESTE-5 apÃ³s 5 instruÃ§Ãµes
 Executando TESTE-7
 TESTE-7 terminado. X=3. Y=5.
 Executando TESTE-1
-Interrompendo TESTE-1 apÃ³s 8 instruÃ§Ãµes
-Executando TESTE-1
 E/S iniciada em TESTE-1
-Interrompendo TESTE-1 apÃ³s 4 instruÃ§Ãµes
+Interrompendo TESTE-1 apÃ³s 12 instruÃ§Ãµes
 Executando TESTE-2
 E/S iniciada em TESTE-2
 Interrompendo TESTE-2 apÃ³s 6 instruÃ§Ãµes
@@ -115,10 +101,8 @@ Interrompendo TESTE-4 apÃ³s 4 instruÃ§Ãµes
 Executando TESTE-9
 TESTE-9 terminado. X=3. Y=4.
 Executando TESTE-6
-Interrompendo TESTE-6 apÃ³s 8 instruÃ§Ãµes
-Executando TESTE-6
 E/S iniciada em TESTE-6
-Interrompendo TESTE-6 apÃ³s 2 instruÃ§Ãµes
+Interrompendo TESTE-6 apÃ³s 10 instruÃ§Ãµes
 Executando TESTE-5
 E/S iniciada em TESTE-5
 Interrompendo TESTE-5 apÃ³s 3 instruÃ§Ãµes
@@ -162,6 +146,6 @@ Executando TESTE-4
 TESTE-4 terminado. X=4. Y=5.
 Executando TESTE-5
 TESTE-5 terminado. X=3. Y=4.
-MEDIA DE TROCAS: 5.8
-MEDIA DE INSTRUCOES: 5.15625
-QUANTUM: 8
+MEDIA DE TROCAS: 5.0
+MEDIA DE INSTRUCOES: 6.470588235294118
+QUANTUM: 15
