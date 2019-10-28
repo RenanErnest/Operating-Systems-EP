@@ -22,16 +22,25 @@ public class Escalonador{
   static String[] memory = new String[programInstructionNum*10]; // 42 lines per program
   static int maxPriorityQueue = 0;
   static int totalInstructionExecuted, totalQuantumUsed, swapCounter = 0;
+  static int quantum;
   static boolean end = false;
 
-  public static String Execution(int quantum)
+  public static void main(String[] args) {
+    String output = Escalonador.Execution();
+    try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("log" + quantum + ".txt"), "UTF-8"))) {
+        writer.write(output);
+    }
+    catch(Exception e) { System.out.println("Error: it cannot has access to write the answer file!"); }
+  }
+
+  public static String Execution()
   {
     try{
-      Init(quantum);
+      Init();
     } catch(Exception e) { e.printStackTrace(); }  
     while(!end)
     {
-      Run(quantum);
+      Run();
     }
     double mediaTrocas = (double)swapCounter/10.0;
     double mediaQuantum = (double)totalInstructionExecuted/(double)totalQuantumUsed;
@@ -42,7 +51,7 @@ public class Escalonador{
     return output;
   }
 
-  static void Run(int quantum)
+  static void Run()
   {
     // Run a process quantum times then return
     String instruction;
@@ -176,7 +185,7 @@ public class Escalonador{
          }
        }
   }
-  static void Init(int quantum) throws Exception
+  static void Init() throws Exception
   {
     //reset variables
     output = "";
@@ -208,7 +217,7 @@ public class Escalonador{
     quantumFile = new File("processos/quantum.txt");  
     BufferedReader br = new BufferedReader(new FileReader(priorityFile)); 
     BufferedReader qbr = new BufferedReader(new FileReader(quantumFile)); 
-    quantum = quantum < 1 ? Integer.parseInt(qbr.readLine()) : quantum;
+    quantum = Integer.parseInt(qbr.readLine());
     
     for(int i = 1; i < 11; i++) // Read each command block
     {
